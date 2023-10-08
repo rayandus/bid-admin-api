@@ -3,6 +3,7 @@ import { DepositBody } from './account.dto';
 import { Request } from 'common/types';
 import { AccountService } from './account.service';
 import { Account } from './account.model';
+import { config } from 'common/config';
 
 @Controller('account')
 export class AccountController {
@@ -13,7 +14,7 @@ export class AccountController {
     const { userId } = req.user;
     const { amount } = body;
 
-    const updatedBalance = await this.accountBalanceService.deposit(userId, amount);
+    const updatedBalance = await this.accountBalanceService.deposit({ userId, currency: config.CURRENCY, amount });
 
     return updatedBalance;
   }

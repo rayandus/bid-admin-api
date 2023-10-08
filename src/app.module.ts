@@ -8,13 +8,17 @@ import { UserModule } from './user/user.module';
 import { AccountController } from './account/account.controller';
 import { AccountService } from './account/account.service';
 import { AccountModule } from './account/account.module';
+import { BidItemController } from './bid-item/bid-item.controller';
+import { BidItemService } from './bid-item/bid-item.service';
+import { BidItemModule } from './bid-item/bid-item.module';
 
 @Module({
-  imports: [AuthModule, UserModule, AccountModule],
-  controllers: [UserController, AccountController],
+  imports: [AuthModule, UserModule, AccountModule, BidItemModule],
+  controllers: [UserController, AccountController, BidItemController],
   providers: [
     UserService,
     AccountService,
+    BidItemService,
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
