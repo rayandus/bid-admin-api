@@ -1,11 +1,11 @@
-import { Body, Controller, Post, Request, Get, HttpCode } from '@nestjs/common';
+import { Body, Controller, Post, Req, Get, HttpCode } from '@nestjs/common';
 import { AuthService, SignInResponse } from './auth.service';
 import { Public } from './auth.decorator';
 import { LoginBodyDto, loginBodySchema } from './auth.dto';
 import { UsePipes } from '@nestjs/common/decorators';
 import { JoiValidationPipe } from 'common/validation-pipe/joi-validation.pipe';
 import { HttpStatus } from '@nestjs/common/enums';
-import { ExtendedRequest } from 'common/types';
+import { Request } from 'common/types';
 
 @Controller('auth')
 export class AuthController {
@@ -22,14 +22,14 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('logout')
-  async logout(@Request() req: ExtendedRequest) {
+  async logout(@Req() req: Request) {
     const { email } = req.user;
 
     this.authService.logout(email);
   }
 
   @Get('profile')
-  getProfile(@Request() req: ExtendedRequest) {
+  getProfile(@Req() req: Request) {
     return req.user;
   }
 }

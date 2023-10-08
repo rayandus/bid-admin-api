@@ -10,9 +10,9 @@ export class UserService {
       throw new ConflictException('User already exists');
     }
 
-    const account = new UserModel({ email, password });
+    const user = new UserModel({ email, password });
 
-    await account.save();
+    await user.save();
   }
 
   async findOne(email: string): Promise<User | null> {

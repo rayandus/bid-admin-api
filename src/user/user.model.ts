@@ -36,9 +36,6 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.index({ email: 1 }, { unique: true });
 
-const UserRegistrationModel = mongoose.model<User>(
-  'UserRegistration',
-  UserSchema,
-);
+const UserModel = mongoose.model<User>('User', UserSchema);
 
-export default UserRegistrationModel;
+export default UserModel;

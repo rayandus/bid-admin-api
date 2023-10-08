@@ -1,6 +1,6 @@
 import { Request as ExpressRequest } from 'express';
-import { JwtToken } from './jwt-token';
+import { User } from './user';
 
-export interface ExtendedRequest extends ExpressRequest {
-  user: JwtToken;
+export interface Request extends ExpressRequest {
+  user: User;
 }
