@@ -30,9 +30,12 @@ jobs:
           pnpm test
           pnpm build
 
+      - Copy package.json
+        run: cp package.json dist/
+
       - name: Zip app
         run: |
-           zip -r node-app.zip . > /dev/null
+           zip -r node-app.zip dist > /dev/null
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -55,7 +58,7 @@ jobs:
       
       - name: Unzip app
         run: |
-          unzip node-app.zip
+          unzip node-app.zip > /dev/null
           rm node-app.zip
 
       - name: 'Deploy to Azure Web App'
