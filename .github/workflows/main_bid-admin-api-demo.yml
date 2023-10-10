@@ -35,7 +35,7 @@ jobs:
 
       - name: Zip app
         run: |
-           zip -r node-app.zip dist > /dev/null
+           zip -r node-app.zip dist/* > /dev/null
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
