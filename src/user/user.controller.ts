@@ -4,14 +4,10 @@ import { UserService } from './user.service';
 import { Public } from 'auth/auth.decorator';
 import { Request } from 'common/types';
 import { IUser } from './user.model';
-import { AccountService } from 'account/account.service';
 
 @Controller('user')
 export class UserController {
-  constructor(
-    private user: UserService,
-    private accountSevice: AccountService,
-  ) {}
+  constructor(private user: UserService) {}
 
   @Public()
   @Post('register')
