@@ -21,7 +21,10 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: pnpm install, build, and test
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Initiate pnpm install, build, and test
         run: |
           pnpm install
           pnpm build --if-present
