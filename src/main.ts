@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 import mongoose from 'mongoose';
 import { config } from 'common/config';
 
+const port = process.env.PORT || 3000;
+
 async function bootstrap() {
   // Opted not to use @nestjs/mongoose for now
   await mongoose.connect(config.MONGO_DB_CONNSTR, {
@@ -24,6 +26,6 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors();
 
-  await app.listen(3000);
+  await app.listen(port);
 }
 bootstrap();
