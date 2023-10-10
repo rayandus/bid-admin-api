@@ -1,9 +1,13 @@
 import { Injectable, ConflictException } from '@nestjs/common';
-import UserModel, { User } from './user.model';
+import UserModel, { IUser } from './user.model';
+import { AccountService } from 'account/account.service';
+import { config } from 'common/config';
 
 @Injectable()
 export class UserService {
-  async register(email: string, password: string): Promise<void> {
+  constructor(private accountService: AccountService) {}
+
+  async register(email: string, password: string): Promise<IUser> {
     const isExists = await this.isExists(email);
 
     if (isExists) {
@@ -12,16 +16,25 @@ export class UserService {
 
     const user = new UserModel({ email, password });
 
-    await user.save();
+    // Initialize balance
+    await this.accountService.addBalance({ userId: user.id, currency: config.CURRENCY, amount: 0 });
+
+    const updatedUser = await user.save();
+
+    return updatedUser;
   }
 
-  async findOne(email: string): Promise<User | null> {
+  async findOne(email: string): Promise<IUser | null> {
     return await UserModel.findOne({ email });
   }
 
-  async getUserWithPasswordHash(email: string): Promise<User | null> {
+  async findOneById(id: string): Promise<IUser | null> {
+    return await UserModel.findOne<IUser>({ _id: id });
+  }
+
+  async getUserWithPasswordHash(email: string): Promise<IUser | null> {
     try {
-      return (await UserModel.findOne({ email }).select('+password')) as User;
+      return (await UserModel.findOne({ email }).select('+password')) as IUser;
     } catch {
       return null;
     }

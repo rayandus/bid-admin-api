@@ -9,7 +9,7 @@ export interface ExpiryDuration {
 }
 
 export interface CurrentBid {
-  bidderId: string;
+  userId: string;
   amount: number;
 }
 
@@ -29,7 +29,9 @@ export interface BidItem {
   expiryStartDateTime?: Date;
 }
 
-export interface IBidItem extends BidItem, Document {}
+export interface IBidItem extends BidItem, Document {
+  currentPrice: number;
+}
 
 interface IBidItemModel extends Model<IBidItem> {}
 
@@ -40,7 +42,7 @@ export const BidItemSchema = new Schema<IBidItem, IBidItemModel>(
     startPrice: { type: Number, required: true },
     currentBid: {
       type: {
-        bidderId: { type: String, required: true },
+        userId: { type: String, required: true },
         amount: { type: Number, required: true },
       },
       _id: false,
@@ -75,7 +77,7 @@ export const BidItemSchema = new Schema<IBidItem, IBidItemModel>(
 BidItemSchema.virtual('currentPrice').get(function deriveCurrentPrice(): number {
   const { amount = 0 } = this.currentBid || {};
 
-  return this.startPrice + amount;
+  return amount || this.startPrice;
 });
 
 BidItemSchema.virtual('currentExpiryDuration').get(function deriveCurrentExpiryDuration(): ExpiryDuration {

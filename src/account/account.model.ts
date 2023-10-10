@@ -2,34 +2,49 @@ import { Model, Types, Schema, Document, model } from 'mongoose';
 
 const { ObjectId } = Schema.Types;
 
-export interface Account extends Document {
+export interface Account {
   userId: Types.ObjectId;
   currency: string;
   amount: number;
 }
 
-interface IAccountModel extends Model<Account> {
-  deposit: ({
+export interface IAccount extends Account, Document {}
+
+interface IAccountModel extends Model<IAccount> {
+  updateBalance: ({
     userId,
     currency,
     amount,
+    mode,
   }: {
     userId: string;
     currency: string;
     amount: number;
+    mode: 'add' | 'minus';
   }) => Promise<Account | null>;
 }
 
-export const AccountSchema = new Schema<Account, IAccountModel>({
+export const AccountSchema = new Schema<IAccount, IAccountModel>({
   userId: { type: ObjectId, required: true },
   currency: { type: String, require: true },
   amount: { type: Number, required: true },
 });
 
 AccountSchema.statics = {
-  async deposit({ userId, currency, amount }: { userId: string; currency: string; amount: number }) {
+  async updateBalance({
+    userId,
+    currency,
+    amount,
+    mode,
+  }: {
+    userId: string;
+    currency: string;
+    amount: number;
+    mode: 'add' | 'minus';
+  }) {
     const filterQuery = { userId: userId };
-    const updateQuery = { userId, currency, $inc: { amount } };
+    const operation = mode === 'add' ? { $inc: { amount } } : { $inc: { amount: amount * -1 } };
+    const updateQuery = { userId, currency, ...operation };
 
     return this.findOneAndUpdate(filterQuery, updateQuery, {
       new: true,
@@ -38,6 +53,6 @@ AccountSchema.statics = {
   },
 };
 
-const AccountModel = model<Account, IAccountModel>('account', AccountSchema);
+const AccountModel = model<IAccount, IAccountModel>('account', AccountSchema);
 
 export default AccountModel;

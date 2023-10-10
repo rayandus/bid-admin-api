@@ -1,9 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import BidItemModel, { BidItem, IBidItem as BidItemResponse } from './bid-item.model';
+import { AccountService } from 'account/account.service';
 
 @Injectable()
 export class BidItemService {
-  constructor() {}
+  constructor(private accountService: AccountService) {}
 
   async create(data: BidItem): Promise<BidItemResponse> {
     const item = new BidItemModel(data);
@@ -26,14 +27,20 @@ export class BidItemService {
       throw new NotFoundException();
     }
 
-    const { startPrice } = bidItem;
+    const { currentPrice, currentBid } = bidItem;
 
-    if (startPrice >= amount) {
+    if (currentPrice >= amount) {
       throw new BadRequestException('Bid amount is insufficient');
     }
 
+    if (currentBid) {
+      await this.accountService.refund({ userId: currentBid.userId, amount: currentBid.amount });
+    }
+
+    await this.accountService.deductBalance({ userId, amount });
+
     bidItem.currentBid = {
-      bidderId: userId,
+      userId,
       amount,
     };
 

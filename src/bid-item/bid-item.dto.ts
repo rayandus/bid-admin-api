@@ -9,7 +9,7 @@ export const createBidItemBodySchema = Joi.object<CreateBidItemBody>({
   name: Joi.string().required(),
   startPrice: Joi.number().greater(0).required(),
   expiryDuration: Joi.object({
-    days: Joi.number().greater(0),
+    days: Joi.number().min(0),
     hours: Joi.number().min(0).max(24),
     minutes: Joi.number().min(0).max(60).required(),
   }).required(),

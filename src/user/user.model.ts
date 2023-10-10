@@ -1,25 +1,34 @@
-import mongoose from 'mongoose';
+import { Model, Schema, Document, model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
-export interface User extends mongoose.Document {
+const transformResult = (_doc: IUser, ret: any): void => {
+  delete ret.password;
+};
+
+export interface User {
   email: string;
   password: string;
   isLoggedIn: boolean;
 }
 
-export const UserSchema = new mongoose.Schema<User>(
+export interface IUser extends User, Document {}
+
+interface IUserModel extends Model<IUser> {}
+
+export const UserSchema = new Schema<IUser, IUserModel>(
   {
     email: { type: String, required: true },
     password: { type: String, required: true, select: false },
     isLoggedIn: { type: Boolean, default: false },
   },
   {
-    collection: 'users',
+    toJSON: { virtuals: true, transform: transformResult },
+    toObject: { virtuals: true, transform: transformResult },
   },
 );
 
 UserSchema.pre('save', async function (next) {
-  const user = this as User;
+  const user = this as IUser;
 
   // Only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) {
@@ -36,6 +45,6 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.index({ email: 1 }, { unique: true });
 
-const UserModel = mongoose.model<User>('User', UserSchema);
+const UserModel = model<IUser, IUserModel>('users', UserSchema);
 
 export default UserModel;
