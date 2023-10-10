@@ -52,6 +52,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+      
+      - name: Unzip app
         run: |
           unzip node-app.zip
           rm node-app.zip
