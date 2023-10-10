@@ -47,9 +47,6 @@ dependencies:
   rxjs:
     specifier: ^7.8.1
     version: 7.8.1
-  tsconfig-paths-jest:
-    specifier: ^0.0.1
-    version: 0.0.1
 
 devDependencies:
   '@nestjs/cli':
@@ -5179,10 +5176,6 @@ packages:
       typescript: 5.2.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-
-  /tsconfig-paths-jest@0.0.1:
-    resolution: {integrity: sha512-YKhUKqbteklNppC2NqL7dv1cWF8eEobgHVD5kjF1y9Q4ocqpBiaDlYslQ9eMhtbqIPRrA68RIEXqknEjlxdwxw==}
-    dev: false
 
   /tsconfig-paths-webpack-plugin@4.1.0:
     resolution: {integrity: sha512-xWFISjviPydmtmgeUAuXp4N1fky+VCtfhOkDUFIv5ea7p4wuTomI4QTrXvFBX2S4jZsmyTSrStQl+E+4w+RzxA==}

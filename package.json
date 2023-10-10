@@ -33,8 +33,7 @@
     "joi": "^17.11.0",
     "mongoose": "^7.6.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1",
-    "tsconfig-paths-jest": "^0.0.1"
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
