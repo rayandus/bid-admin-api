@@ -30,7 +30,7 @@ jobs:
           pnpm test
           pnpm build
 
-      - Copy package.json
+      - name: Copy package.json
         run: cp package.json dist/
 
       - name: Zip app
