@@ -6,15 +6,19 @@ Bid Admin API is a back-end API that provides programmatic access to the databas
 
 The API is used by the bid portal demo to save and retrieve bid data.
 
+Using postman or curl, try the [api here](https://bid-admin-api-demo-prod.azurewebsites.net/api)
+
+> 📝 API Documentation to follow
+
 ## Project Overview
 
 ### Architecture
 
-- Architeture is discussed here (tbd)
+- 📝 Architeture is discussed here (tbd)
 
 ### Limitations
 
-- Limitations and to dos are discussed here (tbd)
+- 📝 Limitations and to dos are discussed here (tbd)
 
 ### Tests
 
@@ -28,7 +32,7 @@ Currently, there are few simple unit tests. Not everything is covered yet.
 
 ### CICD
 
-- Currently, CICD has not been completed
+- 📝 Currently, CICD has not been completed
 
 ## Prerequisite
 
