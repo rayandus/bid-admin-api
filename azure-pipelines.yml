@@ -20,8 +20,12 @@ steps:
   displayName: 'Install pnpm'
 
 - script: |
+    npm install -g @nestjs/cli
+  displayName: 'Install cli'
+
+- script: |
     pnpm install --prod
-    npm run build
+    pnpm build
   displayName: 'Install, build app'
 
 - task: ArchiveFiles@2
