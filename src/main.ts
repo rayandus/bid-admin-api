@@ -4,9 +4,8 @@ import { AppModule } from './app.module';
 import mongoose from 'mongoose';
 import { config } from 'common/config';
 
-const port = process.env.PORT || 8080;
-
-console.log('*** PORT', port);
+const defaultPort = process.env.NODE_ENV === 'production' ? 8080 : process.env.PORT;
+const port = defaultPort || 3000;
 
 async function bootstrap() {
   // Opted not to use @nestjs/mongoose for now

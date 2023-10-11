@@ -11,10 +11,11 @@ import { AccountModule } from './account/account.module';
 import { BidItemController } from './bid-item/bid-item.controller';
 import { BidItemService } from './bid-item/bid-item.service';
 import { BidItemModule } from './bid-item/bid-item.module';
+import { AppController } from 'app.controller';
 
 @Module({
   imports: [AuthModule, UserModule, AccountModule, BidItemModule],
-  controllers: [UserController, AccountController, BidItemController],
+  controllers: [AppController, UserController, AccountController, BidItemController],
   providers: [
     UserService,
     AccountService,
