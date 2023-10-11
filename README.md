@@ -6,6 +6,27 @@ Bid Admin API is a back-end API that provides programmatic access to the databas
 
 The API is used by the bid portal demo to save and retrieve bid data.
 
+## Project Overview
+
+### Architecture
+
+- Architeture is discussed here (tbd)
+
+### Limitations
+
+- Limitations and to dos are discussed here (tbd)
+
+### Tests
+
+Currently, there are few simple unit tests. Not everything is covered yet.
+
+    ✅ Unit Tests (Partial)
+
+    ❌ Integration Tests
+
+    ❌ E2E Tests
+
+
 ## Prerequisite
 
 1. Node Version Manager (nvm)
