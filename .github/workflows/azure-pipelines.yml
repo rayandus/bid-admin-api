@@ -24,7 +24,7 @@ steps:
   displayName: 'Install cli'
 
 - script: |
-    pnpm install --prod
+    pnpm install
     pnpm build
   displayName: 'Install, build app'
 
