@@ -16,12 +16,12 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install -g yarn
+    npm install -g pnpm
   displayName: 'Install pnpm'
 
 - script: |
-    yarn install
-    yarn build
+    pnpm install
+    pnpm build
   displayName: 'Install, build app'
 
 - task: ArchiveFiles@2
