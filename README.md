@@ -61,17 +61,18 @@ The API is used by the bid portal demo to save and retrieve bid data.
   curl -X GET 'http://localhost:3000/api'
   ```
 
-## Database
+## Database & JWT Authentication
 
 This api will automatically connect to a MongoDB hosted in Azure. The connection string is not included for security purposes.
 
-To change the database configuration:
+To change the database and jwt configuration:
 
 1. Create a `.env` in the root directory
 
 1. Add this variable with the new connection string
 
   ```bash
+  JWT_SECRET=anykeyhere
   MONGO_DB_CONNSTR=mongodb://dbname:password@host.com:10255/...
   ```
 
