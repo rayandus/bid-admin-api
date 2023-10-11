@@ -1,6 +1,6 @@
 # Bid Admin API Demo
 
-Bid Admin API is a back-end API that provides programmatic access to the database. It allows developers to create, read, update, and delete data. The API is RESTful and uses JSON as the data format.
+Bid Admin API is a back-end API that provides programmatic access to the database for the Bid Demo Project. It allows developers to create, read, update, and delete data. The API is RESTful and uses JSON as the data format.
 
 The API is used by the bid portal demo to save and retrieve bid data.
 
@@ -12,7 +12,7 @@ The API is used by the bid portal demo to save and retrieve bid data.
 
 ## Setup
 
-1. Clone [bid-admin-api](git@github.com:rayandus/bid-admin-api.git) repo in your local
+1. Clone [bid-admin-api](https://github.com/rayandus/bid-admin-api) repo in your local
 
 1. Go to project root directory and install
 
@@ -67,7 +67,7 @@ This api will automatically connect to a MongoDB hosted in Azure. The connection
 
 To change the database configuration:
 
-1. Create a .env
+1. Create a `.env` in the root directory
 
 1. Add this variable with the new connection string
 
