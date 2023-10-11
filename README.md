@@ -8,6 +8,7 @@ The API is used by the bid portal demo to save and retrieve bid data.
 
 1. Node Version Manager (nvm)
 1. Pnpm
+1. (Optional) Docker
 
 ## Setup
 
@@ -22,24 +23,56 @@ The API is used by the bid portal demo to save and retrieve bid data.
    pnpm install
    ```
 
-1. Start the application
+1. Start the application without Docker
 
    ```bash
    pnpm start:dev
    ```
 
-   > The api will run on port `3030` by default with preifx `api`. E.g. `http://localhost:3010/api`
+   > The api will run on port `3000` by default with preifx `api`. E.g. `http://localhost:3010/api`
 
    or
 
    ```bash
-   PORT=<port> pnpm start:dev
+   PORT=3000 pnpm start:dev
    ```
+
+   > Just replace `PORT=3000` to your choice of port
+
+1. Or, start the application with Docker
+
+   ```bash
+   docker build -t app .
+   ```
+
+   > You can replace `app` with any name
+
+   ```bash
+   docker run -p 3000:3000 app
+   ```
+
+   > To ensure that the app is accessible from the docker container, map the ports. Left port can be any port. Right port is the default port of the app as it runs in the docker container.
+   >
+   > You can do this `3010:3000`
 
 1. Validate if api is working
 
   ```bash
-  curl -X GET 'http://localhost:3010/api'
+  curl -X GET 'http://localhost:3000/api'
+  ```
+
+## Database
+
+This api will automatically connect to a MongoDB hosted in Azure. The connection string is not included for security purposes.
+
+To change the database configuration:
+
+1. Create a .env
+
+1. Add this variable with the new connection string
+
+  ```bash
+  MONGO_DB_CONNSTR=mongodb://dbname:password@host.com:10255/...
   ```
 
 ## More about this project
