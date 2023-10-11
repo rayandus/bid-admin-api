@@ -26,6 +26,9 @@ Currently, there are few simple unit tests. Not everything is covered yet.
 
     ❌ E2E Tests
 
+### CICD
+
+- Currently, CICD has not been completed
 
 ## Prerequisite
 
