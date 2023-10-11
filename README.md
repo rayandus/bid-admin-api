@@ -87,6 +87,8 @@ Currently, there are few simple unit tests. Not everything is covered yet.
 
 1. Validate if api is working
 
+  > ⚠️ Prerequisite: Working MongoDB connection
+
   ```bash
   curl -X GET 'http://localhost:3000/api'
   ```
