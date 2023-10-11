@@ -21,24 +21,21 @@ steps:
 
 - script: |
     pnpm install
+    pnpm test
     pnpm build
-  displayName: 'Install and build app'
-
-- task: CopyFiles@2
-  inputs:
-    Contents: 'package*.json'
-    TargetFolder: 'dist'
+  displayName: 'Install, test, build app'
 
 - task: ArchiveFiles@2
+  displayName: 'Archive files'
   inputs:
-    rootFolderOrFile: 'dist'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: 'dist.zip'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'dist.zip'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     ArtifactName: 'BidAdminApiDemo'
     publishLocation: 'Container'
