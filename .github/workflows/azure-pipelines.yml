@@ -16,16 +16,12 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install -g pnpm
+    npm install -g yarn
   displayName: 'Install pnpm'
 
 - script: |
-    npm install -g @nestjs/cli
-  displayName: 'Install cli'
-
-- script: |
-    pnpm install
-    pnpm build
+    yarn install
+    yarn build
   displayName: 'Install, build app'
 
 - task: ArchiveFiles@2
