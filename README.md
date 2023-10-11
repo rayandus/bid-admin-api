@@ -4,35 +4,12 @@
 
 Bid Admin API is a back-end API that provides programmatic access to the database for the Bid Demo Project. It allows developers to create, read, update, and delete data. The API is RESTful and uses JSON as the data format.
 
-The API is used by the bid portal demo to save and retrieve bid data.
-
-Using postman or curl, try the [api here](https://bid-admin-api-demo-prod.azurewebsites.net/api)
-
-> 📝 API Documentation to follow
+The API is used by the [Bid Portal Demo](https://bidportaldemo.z31.web.core.windows.net/) to save and retrieve bid data.
 
 ## Project Overview
 
-### Architecture
+For more details on the architecture, authentication flow, plans or to do's, please check [here](https://rma-demo.notion.site/Bid-Demo-Project-9cf3e25d70e44f4b868499aeb89fd81a)
 
-- 📝 Architecture is discussed here (tbd)
-
-### Limitations
-
-- 📝 Limitations and to dos are discussed here (tbd)
-
-### Tests
-
-Currently, there are few simple unit tests. Not everything is covered yet.
-
-    ✅ Unit Tests (Partial)
-
-    ❌ Integration Tests
-
-    ❌ E2E Tests
-
-### CICD
-
-- 📝 Currently, CICD has not been completed
 
 ## Prerequisite
 
