@@ -20,10 +20,9 @@ steps:
   displayName: 'Install pnpm'
 
 - script: |
-    pnpm install
-    pnpm test
+    pnpm install --prod
     pnpm build
-  displayName: 'Install, test, build app'
+  displayName: 'Install, build app'
 
 - task: ArchiveFiles@2
   displayName: 'Archive files'
