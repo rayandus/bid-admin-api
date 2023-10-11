@@ -33,6 +33,13 @@ export class BidItemService {
       throw new BadRequestException('Bid amount is insufficient');
     }
 
+    const balance = await this.accountService.getBalance(userId);
+    const balanceAmount = balance?.amount || 0;
+
+    if (balanceAmount < currentPrice) {
+      throw new BadRequestException('Balance is insufficient');
+    }
+
     if (currentBid) {
       await this.accountService.refund({ userId: currentBid.userId, amount: currentBid.amount });
     }
