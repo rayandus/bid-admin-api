@@ -14,7 +14,7 @@ Using postman or curl, try the [api here](https://bid-admin-api-demo-prod.azurew
 
 ### Architecture
 
-- 📝 Architeture is discussed here (tbd)
+- 📝 Architecture is discussed here (tbd)
 
 ### Limitations
 
@@ -59,7 +59,7 @@ Currently, there are few simple unit tests. Not everything is covered yet.
    pnpm start:dev
    ```
 
-   > The api will run on port `3000` by default with preifx `api`. E.g. `http://localhost:3010/api`
+   > The api will run on port `3000` by default with suffix `api`. E.g. `http://localhost:3010/api`
 
    or
 
@@ -93,7 +93,7 @@ Currently, there are few simple unit tests. Not everything is covered yet.
 
 ## Database & JWT Authentication
 
-This api will automatically connect to a MongoDB hosted in Azure. The connection string is not included for security purposes.
+Database used is MongoDB hosted in Azure. However, the database connection string is not included for security purposes. Please set up your own MongoDB database (cloud or local) for development purposes.
 
 To change the database and jwt configuration:
 
@@ -110,4 +110,6 @@ To change the database and jwt configuration:
 
 1. Built with NestJS and TypeScript
 
-1. Database is powered by MongoDB hosted in Azure
+1. Database used is MongoDB hosted in Azure
+
+1. Mongoose for the Object Data Mapper
