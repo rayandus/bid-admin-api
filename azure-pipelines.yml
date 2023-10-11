@@ -21,7 +21,7 @@ steps:
 
 - script: |
     pnpm install --prod
-    pnpm build
+    npm run build
   displayName: 'Install, build app'
 
 - task: ArchiveFiles@2
