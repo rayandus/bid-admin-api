@@ -33,11 +33,13 @@ jobs:
     - group: bid-admin-api-demo-dev
     - name: artifactName
       value: artifact-dev
-    - name: dockerTag
+    - name: tag
       value: dev
-    - name: dockerImage
-      value: $(Build.Repository.Name)
   steps:
+    # Extract the repo name without the github org or account name
+    - script: |
+        repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
+        echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
     - template: common-steps-azure-pipelines.yml
 
 # - job: BuildStepsForProd
