@@ -1,13 +1,22 @@
 steps:
-# - task: Docker@2
-#   displayName: Build Docker Image
-#   inputs:
-#     repository: $(Build.Repository.Name) 
-#     command: build
-#     Dockerfile: Dockerfile
-#     tags: $(tagName)
+- task: Docker@2
+  displayName: Build Docker Image
+  inputs:
+    repository: $(Build.Repository.Name)
+    command: build
+    Dockerfile: $(dockerFile)
+    tags: $(tagName)
 
-- script: |
-    echo $(Build.Repository.Name)
-    echo $(Build.SourceBranchName)
-  displayName: 'Run a one-line script'
+# - script: |
+#     echo $(Build.Repository.Name)
+#     echo $(Build.SourceBranchName)
+#   displayName: 'Run a one-line script'
+
+- task: Docker@2
+  displayName: Push Docker Image
+  inputs:
+    # repository: $(containerRegistry)/$(imageRepository)
+    repository: rmademo/$(Build.Repository.Name)
+    command: push
+    Dockerfile: $(dockerFile)
+    tags: $(tagName)

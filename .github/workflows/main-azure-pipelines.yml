@@ -22,6 +22,7 @@ variables:
   isDev: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
   isProd: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'))]
   isPullRequest: $[ eq(variables['Build.Reason'], 'PullRequest') ]
+  dockerFile: DockerFile
 
 jobs:
 - job: BuildStepsForDev
