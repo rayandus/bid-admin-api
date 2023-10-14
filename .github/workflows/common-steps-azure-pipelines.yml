@@ -11,6 +11,7 @@ steps:
     command: build
     Dockerfile: $(dockerFile)
     repository: $(dockerImage)
+    container: rmademo
     arguments: --no-cache
     tags: $(dockerTag)
 
