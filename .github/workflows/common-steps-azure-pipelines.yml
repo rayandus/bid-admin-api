@@ -3,7 +3,7 @@ steps:
   displayName: Login to Docker Registry
   inputs:
     command: login
-    containerRegistry: rmademo.azurecr.io
+    containerRegistry: rmademo
 
 - task: Docker@2
   displayName: Build Docker Image
