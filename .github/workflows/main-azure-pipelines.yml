@@ -33,8 +33,10 @@ jobs:
     - group: bid-admin-api-demo-dev
     - name: artifactName
       value: artifact-dev
+    - name: dockerTag
+      value: dev
     - name: dockerImage
-      value: $(Build.Repository.Name):dev
+      value: $(Build.Repository.Name)
   steps:
     - template: common-steps-azure-pipelines.yml
 
