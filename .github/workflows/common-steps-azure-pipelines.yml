@@ -3,7 +3,7 @@ steps:
   displayName: Login to Docker Registry
   inputs:
     command: login
-    containerRegistry: rmademo
+    containerRegistry: 'Bid Admin API Demo Docker DevOps Service Connection'
 
 - task: Docker@2
   displayName: Build Docker Image
