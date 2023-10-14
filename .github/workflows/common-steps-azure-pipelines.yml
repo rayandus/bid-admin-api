@@ -4,7 +4,7 @@ steps:
   inputs:
     command: build
     Dockerfile: $(dockerFile)
-    repository: $(dockerImage)
+    repository: rmademo.azurecr.io/$(dockerImage)
     arguments: --no-cache
     tags: $(dockerTag)
 
