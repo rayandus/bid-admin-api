@@ -1,0 +1,12 @@
+steps:
+- task: Docker@2
+  displayName: Build Docker image
+  inputs:
+    repository: $(Build.Repository.Name) 
+    command: build
+    Dockerfile: Dockerfile
+    tags: $(tagName)
+
+- script: |
+    echo $(Build.Repository.Name) 
+  displayName: 'Run a one-line script'
