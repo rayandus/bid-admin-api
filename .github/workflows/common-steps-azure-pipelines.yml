@@ -28,6 +28,7 @@ steps:
 #     Dockerfile: $(dockerFile)
 #     tags: $(dockerTag)
 
+
 - task: Docker@2
   displayName: Push Docker Image
   inputs:
