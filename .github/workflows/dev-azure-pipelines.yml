@@ -43,13 +43,10 @@ stages:
           echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
       - template: common-steps-azure-pipelines.yml
 
-# - job: BuildStepsForProd
-#   displayName: 'Build Steps for Prod'
-#   condition: eq(variables.isProd, true)
-#   variables:
-#     # App variables stored in Azure DevOps. Will be automatically injected during build
-#     - group: bid-portal-demo-prod
-#     - name: artifactName
-#       value: artifact-prod
-#   steps:
-#     - template: common-steps-azure-pipelines.yml
+- stage: DeployStage
+  displayName: 'Deploy Stage for Dev'
+  condition: eq(variables.isDev, true)
+  jobs:
+  - job: DeployJob
+    steps:
+    - template: common-deploy-steps-azure-pipelines.yml
