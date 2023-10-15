@@ -45,7 +45,6 @@ stages:
 
 - stage: DeployStage
   displayName: 'Deploy Stage for Dev'
-  condition: eq(variables.isDev, true)
   condition: and(succeeded(), ne(variables.isPullRequest, true), eq(variables.isDev, true))
   dependsOn: BuildStage
   jobs:
