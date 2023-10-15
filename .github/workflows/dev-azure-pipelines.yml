@@ -16,12 +16,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  nodeVersion: '18.x'
-  isDev: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
-  isPullRequest: $[ eq(variables['Build.Reason'], 'PullRequest') ]
-  dockerFile: Dockerfile
-  serviceConnection: 'Bid Admin API Demo Docker DevOps Service Connection'
-  tag: dev
+  - name: nodeVersion
+    value: '18.x'
+  - name: isDev
+    value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
+  - name: isPullRequest
+    value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
+  - name: dockerFile
+    value: Dockerfile
+  - name: serviceConnection
+    value: 'Bid Admin API Demo Docker DevOps Service Connection'
+  - name: tag
+    value: dev
   - group: bid-admin-api-demo-dev
 
 stages:
