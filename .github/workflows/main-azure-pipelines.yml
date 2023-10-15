@@ -23,7 +23,7 @@ variables:
   isProd: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'))]
   isPullRequest: $[ eq(variables['Build.Reason'], 'PullRequest') ]
   dockerFile: Dockerfile
-  test: 'Bid Admin API Demo Docker DevOps Service Connection'
+  serviceConnection: 'Bid Admin API Demo Docker DevOps Service Connection'
 
 jobs:
 - job: BuildStepsForDev
