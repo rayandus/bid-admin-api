@@ -42,6 +42,7 @@ jobs:
         echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
     - template: common-steps-azure-pipelines.yml
 
+
 # - job: BuildStepsForProd
 #   displayName: 'Build Steps for Prod'
 #   condition: eq(variables.isProd, true)
