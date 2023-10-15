@@ -22,6 +22,8 @@ variables:
   isDev: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
   isProd: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'))]
   isPullRequest: $[ eq(variables['Build.Reason'], 'PullRequest') ]
+  dockerFile: Dockerfile
+  serviceConnection: 'Bid Admin API Demo Docker DevOps Service Connection'
 
 jobs:
 - job: BuildStepsForDev
@@ -32,9 +34,13 @@ jobs:
     - group: bid-admin-api-demo-dev
     - name: artifactName
       value: artifact-dev
-    - name: tagName
+    - name: tag
       value: dev
   steps:
+    # Extract the repo name without the github org or account name
+    - script: |
+        repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
+        echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
     - template: common-steps-azure-pipelines.yml
 
 # - job: BuildStepsForProd
