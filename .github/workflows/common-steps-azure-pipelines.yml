@@ -23,3 +23,4 @@ steps:
     command: push
     repository: $(CONTAINER_REGISTRY_SERVER)/$(repoNameAsImageName)
     tags: $(tag)
+  condition: and(succeeded(), ne(variables.isPullRequest, true), or(eq(variables.isDev, true), eq(variables.isProd, true)))
