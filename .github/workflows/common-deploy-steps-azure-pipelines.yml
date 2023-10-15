@@ -2,7 +2,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1'
+    azureSubscription: $(serviceConnection)
     appType: 'webAppContainer'
     WebAppName: 'bid-admin-api-demo-dev' # replace with your Azure web app name
     DockerNamespace: 'rmademo.azurecr.io' # replace with your Docker ID
