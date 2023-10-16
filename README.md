@@ -1,6 +1,6 @@
 # Bid Admin API Demo
 
-[![Build Status](https://dev.azure.com/rma-demo/bid-admin-api-demo/_apis/build/status%2Frayandus.bid-admin-api?branchName=main)](https://dev.azure.com/rma-demo/bid-admin-api-demo/_build/latest?definitionId=2&branchName=main)
+[![Build Status](https://dev.azure.com/rma-demo/bid-demo-project/_apis/build/status%2Frayandus.bid-admin-api-prod?branchName=main)](https://dev.azure.com/rma-demo/bid-demo-project/_build/latest?definitionId=5&branchName=main)
 
 Bid Admin API is a back-end API that provides programmatic access to the database for the Bid Demo Project. It allows developers to create, read, update, and delete data. The API is RESTful and uses JSON as the data format.
 
