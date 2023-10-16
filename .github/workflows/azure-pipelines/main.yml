@@ -1,0 +1,12 @@
+variables:
+  - name: isDev
+    value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
+
+stages:
+- stage: DevelopmentStage
+  displayName: 'Development Stage'
+  condition: eq(variables.isDev, true)
+  jobs:
+  - job: DevelopmentJob
+    steps:
+    - template: stageTemplate.yml
