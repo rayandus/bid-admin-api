@@ -11,26 +11,18 @@ variables:
     value: dev
   - group: bid-admin-api-demo-dev
 
-stages:
-# Build Stage for Dev
-- stage: BuildStage
-  displayName: 'Build Stage for Dev'
-  condition: eq(variables.isDev, true)
-  jobs:
-  - job: BuildJob
-    steps:
-      # Extract the repo name without the github org or account name
-      - script: |
-          repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
-          echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
-        displayName: 'Parse repo name'
-      - template: common-build-steps.yml
-# Deployment Stage for Dev
-- stage: DeployStage
-  displayName: 'Deploy Stage for Dev'
+jobs:
+- job: BuildJob
+  displayName: 'Build Job'
+  steps:
+    # Extract the repo name without the github org or account name
+    - script: |
+        repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
+        echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
+      displayName: 'Parse repo name'
+    - template: common-build-steps.yml
+- job: DeployJob
+  dependsOn: BuildJob
   condition: and(succeeded(), ne(variables.isPullRequest, true), eq(variables.isDev, true))
-  dependsOn: BuildStage
-  jobs:
-  - job: DeployJob
-    steps:
-    - template: common-deploy-steps.yml
+  steps:
+  - template: common-deploy-steps.yml
