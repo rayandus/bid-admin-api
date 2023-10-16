@@ -20,15 +20,17 @@ variables:
     value: '18.x'
   - name: isDev
     value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
+  - name: isProd
+    value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'))]
   - name: isPullRequest
     value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
   - name: dockerFile
     value: Dockerfile
-  # Variable group set in DevOps Library. All variables are prefix vg_
+  # Variable group set in DevOps Library. All variables are prefixed vg_
   - group: bid-admin-api-demo-container-registry
 
 stages:
-# Build Stage for Dev
+# DEVELOPMENT STAGE
 - stage: BuildStageDev
   displayName: 'Build Stage for Dev'
   condition: eq(variables.isDev, true)
@@ -43,7 +45,6 @@ stages:
           echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
         displayName: 'Parse repo name'
       - template: common-build-steps.yml
-# Deployment Stage for Dev
 - stage: DeployStageDev
   displayName: 'Deploy Stage for Dev'
   condition: and(succeeded(), ne(variables.isPullRequest, true), eq(variables.isDev, true))
@@ -53,5 +54,32 @@ stages:
     variables:
       tag: dev
       appServiceName: $(vg_appServiceNameDev)
+    steps:
+    - template: common-deploy-steps.yml
+
+# PRODUCTION STAGE
+- stage: BuildStageProd
+  displayName: 'Build Stage for Prod'
+  condition: eq(variables.isProd, true)
+  jobs:
+  - job: BuildJob
+    variables:
+      tag: prod
+    steps:
+      # Extract the repo name without the github org or account name
+      - script: |
+          repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
+          echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
+        displayName: 'Parse repo name'
+      - template: common-build-steps.yml
+- stage: DeployStageProd
+  displayName: 'Deploy Stage for Prod'
+  condition: and(succeeded(), ne(variables.isPullRequest, true), eq(variables.isProd, true))
+  dependsOn: BuildStageProd
+  jobs:
+  - job: DeployJob
+    variables:
+      tag: prod
+      appServiceName: $(vg_appServiceNameProd)
     steps:
     - template: common-deploy-steps.yml
