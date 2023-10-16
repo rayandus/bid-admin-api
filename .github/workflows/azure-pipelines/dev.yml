@@ -25,7 +25,7 @@ variables:
   - name: dockerFile
     value: Dockerfile
   - name: tag
-    value: dev-$(Build.BuildId)
+    value: dev-$(Build.BuildNumber)
   - group: bid-admin-api-demo-dev
 
 stages:
