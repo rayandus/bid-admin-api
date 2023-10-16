@@ -2,7 +2,7 @@
 trigger:
   branches:
     include:
-      - develop
+    - develop
 
 # Trigger pipeline from PRs. Currently, has to be configured in Azure DevOps settings for it to fully work
 pr:
@@ -26,18 +26,33 @@ variables:
     value: Dockerfile
 
 stages:
-  - stage: DevelopmentStage
-    displayName: 'Development Stage'
-    condition: eq(variables.isDev, true)
-    jobs:
-      - job: DevelopmentJob
-        steps:
-          # Extract the repo name without the github org or account name
-          - script: |
-              repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
-              echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
-            displayName: 'Parse repo name'
-          # Build steps
-          - template: common-build-steps.yml
-          # Deploy steps
-          - template: common-deploy-steps.yml
+# Build Stage for Dev
+- stage: BuildStageDev
+  displayName: 'Build Stage for Dev'
+  condition: eq(variables.isDev, true)
+  jobs:
+  - job: BuildJob
+    variables:
+      - name: tag
+        value: dev
+      - group: bid-admin-api-demo-dev
+    steps:
+      # Extract the repo name without the github org or account name
+      - script: |
+          repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
+          echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
+        displayName: 'Parse repo name'
+      - template: common-build-steps.yml
+# Deployment Stage for Dev
+- stage: DeployStageDev
+  displayName: 'Deploy Stage for Dev'
+  condition: and(succeeded(), ne(variables.isPullRequest, true), eq(variables.isDev, true))
+  dependsOn: BuildStageDev
+  jobs:
+  - job: DeployJob
+    variables:
+      - name: tag
+        value: dev
+      - group: bid-admin-api-demo-dev
+    steps:
+    - template: common-deploy-steps.yml
