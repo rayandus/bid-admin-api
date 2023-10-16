@@ -8,6 +8,6 @@ export class AppController {
   @Public()
   @Get()
   getHello(): string {
-    return 'Hello World...dev!';
+    return 'Hello World';
   }
 }
