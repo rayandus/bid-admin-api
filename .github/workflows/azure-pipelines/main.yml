@@ -1,3 +1,20 @@
+# Trigger pipeline from branches
+trigger:
+  branches:
+    include:
+    - develop
+
+# Trigger pipeline from PRs. Currently, has to be configured in Azure DevOps settings for it to fully work
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - develop
+
+# Environment to use
+pool:
+  vmImage: 'ubuntu-latest'
+
 variables:
   - name: isDev
     value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
