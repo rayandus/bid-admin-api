@@ -1,0 +1,11 @@
+steps:
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: $(azureSubscription)
+    appType: 'webAppContainer'
+    WebAppName: $(appServiceName)
+    DockerNamespace: $(registryServer)
+    DockerRepository: $(registryRepository)
+    DockerImageTag: $(tag) # replace with your Docker image tag
+    StartupCommand: 'pnpm start:prod'
