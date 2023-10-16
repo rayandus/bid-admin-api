@@ -29,12 +29,12 @@ stages:
   - stage: DevelopmentStage
     displayName: 'Development Stage'
     condition: eq(variables.isDev, true)
+    variables:
+      - name: tag
+        value: dev
+      - group: bid-admin-api-demo-dev
     jobs:
       - job: DevelopmentJob
-        variables:
-          - name: tag
-            value: dev
-          - group: bid-admin-api-demo-dev
         steps:
           # Extract the repo name without the github org or account name
           - script: |
