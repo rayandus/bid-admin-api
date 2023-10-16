@@ -2,7 +2,7 @@
 trigger:
   branches:
     include:
-    - develop
+      - develop
 
 # Trigger pipeline from PRs. Currently, has to be configured in Azure DevOps settings for it to fully work
 pr:
@@ -26,14 +26,22 @@ variables:
     value: Dockerfile
 
 stages:
-- stage: DevelopmentStage
-  displayName: 'Development Stage'
-  condition: eq(variables.isDev, true)
-  jobs:
-  - job: DevelopmentJob
-    variables:
-      - name: tag
-        value: dev
-      - group: bid-admin-api-demo-dev
-    steps:
-      - template: dev.yml
+  - stage: DevelopmentStage
+    displayName: 'Development Stage'
+    condition: eq(variables.isDev, true)
+    jobs:
+      - job: DevelopmentJob
+        variables:
+          - name: tag
+            value: dev
+          - group: bid-admin-api-demo-dev
+        steps:
+          # Extract the repo name without the github org or account name
+          - script: |
+              repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
+              echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
+            displayName: 'Parse repo name'
+          # Build steps
+          - template: common-build-steps.yml
+          # Deploy steps
+          - template: common-deploy-steps.yml
