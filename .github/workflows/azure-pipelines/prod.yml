@@ -18,8 +18,8 @@ pool:
 variables:
   - name: nodeVersion
     value: '18.x'
-  - name: isProd
-    value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'))]
+  # - name: isProd
+  #   value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'))]
   - name: isPullRequest
     value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
   - name: dockerFile
@@ -45,7 +45,7 @@ stages:
 # Deployment Stage
 - stage: DeployStage
   displayName: 'Deploy Stage for Prod'
-  condition: and(succeeded(), ne(variables.isPullRequest, true), eq(variables.isProd, true))
+  condition: and(succeeded(), ne(variables.isPullRequest, true))
   dependsOn: BuildStage
   jobs:
   - job: DeployJob
