@@ -1,17 +1,3 @@
-variables:
-  - name: nodeVersion
-    value: '18.x'
-  - name: isDev
-    value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
-  - name: isPullRequest
-    value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
-  - name: dockerFile
-    value: Dockerfile
-  - name: tag
-    value: dev
-  - group: bid-admin-api-demo-dev
-
-jobs:
 - job: BuildJob
   displayName: 'Build Job'
   steps:

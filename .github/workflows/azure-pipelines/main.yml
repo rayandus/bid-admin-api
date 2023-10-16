@@ -16,8 +16,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
+  - name: nodeVersion
+    value: '18.x'
   - name: isDev
     value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
+  - name: isPullRequest
+    value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
+  - name: dockerFile
+    value: Dockerfile
 
 stages:
 - stage: DevelopmentStage
@@ -25,5 +31,9 @@ stages:
   condition: eq(variables.isDev, true)
   jobs:
   - job: DevelopmentJob
+    variables:
+      - name: tag
+        value: dev
+      - group: bid-admin-api-demo-dev
     steps:
-    - template: dev.yml
+      - template: dev.yml
