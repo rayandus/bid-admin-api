@@ -12,12 +12,12 @@ RUN npm install -g pnpm
 # Install dependencies
 RUN pnpm install
 
-# Run pre-build checks
-# RUN pnpm lint
-RUN pnpm test
-
 # Copy from host current directory to the docker working directory
 COPY . .
+
+# Run pre-build checks
+RUN pnpm lint
+RUN pnpm test
 
 # Build the app
 RUN pnpm build
