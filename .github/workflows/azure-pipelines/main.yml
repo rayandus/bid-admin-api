@@ -9,4 +9,4 @@ stages:
   jobs:
   - job: DevelopmentJob
     steps:
-    - template: stageTemplate.yml
+    - template: dev.yml
