@@ -25,14 +25,13 @@ variables:
   - name: dockerFile
     value: Dockerfile
   - name: tag
-    value: prod
+    value: prod-$(Build.BuildNumber)
   - group: bid-admin-api-demo-prod
 
 stages:
 # Build Stage
 - stage: BuildStage
   displayName: 'Build Stage for Prod'
-  condition: eq(variables.isProd, true)
   jobs:
   - job: BuildJob
     steps:
