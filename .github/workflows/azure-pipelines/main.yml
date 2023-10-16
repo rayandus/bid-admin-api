@@ -24,6 +24,8 @@ variables:
     value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
   - name: dockerFile
     value: Dockerfile
+  # Variable group set in DevOps Library. All variables are prefix vg_
+  - group: bid-admin-api-demo-container-registry
 
 stages:
 # Build Stage for Dev
@@ -33,9 +35,7 @@ stages:
   jobs:
   - job: BuildJob
     variables:
-      - name: tag
-        value: dev
-      - group: bid-admin-api-demo-dev
+      tag: dev
     steps:
       # Extract the repo name without the github org or account name
       - script: |
@@ -51,8 +51,7 @@ stages:
   jobs:
   - job: DeployJob
     variables:
-      - name: tag
-        value: dev
-      - group: bid-admin-api-demo-dev
+      tag: dev
+      appServiceName: $(vg_appServiceNameDev)
     steps:
     - template: common-deploy-steps.yml
