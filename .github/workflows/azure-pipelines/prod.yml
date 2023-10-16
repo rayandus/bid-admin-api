@@ -40,6 +40,7 @@ stages:
       - script: |
           repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
           echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
+        displayName: 'Parse repo name'
       - template: common-build-steps.yml
 # Deployment Stage
 - stage: DeployStage
