@@ -3,7 +3,7 @@ steps:
   displayName: Login to Docker Registry
   inputs:
     command: login
-    containerRegistry: $(serviceConnection) # Variable from variable group will not work here
+    containerRegistry: $(serviceConnection)
 
 - task: Docker@2
   displayName: Build Docker Image

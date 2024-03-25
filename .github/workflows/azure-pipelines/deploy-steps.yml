@@ -7,5 +7,5 @@ steps:
     WebAppName: $(appServiceName)
     DockerNamespace: $(registryServer)
     DockerRepository: $(registryRepository)
-    DockerImageTag: $(tag) # replace with your Docker image tag
+    DockerImageTag: $(tag)
     StartupCommand: 'pnpm start:prod'

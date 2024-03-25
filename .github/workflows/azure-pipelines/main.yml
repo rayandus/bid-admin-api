@@ -45,12 +45,13 @@ stages:
   jobs:
   - job: BuildJob
     steps:
-      # Extract the repo name without the github org or account name
+      # Extract the repo name without the github org or account name e.g. org/repo_name
       - script: |
           repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
           echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
-        displayName: 'Parse repo name'
-      - template: common-build-steps.yml
+          echo Repository Name: $repo_name"
+        displayName: 'Set Container Registry Repo Name'
+      - template: build-steps.yml
 # Deployment Stage for Dev
 - stage: DeployStage
   displayName: 'Deploy'
@@ -59,4 +60,4 @@ stages:
   jobs:
   - job: DeployJob
     steps:
-    - template: common-deploy-steps.yml
+    - template: deploy-steps.yml
