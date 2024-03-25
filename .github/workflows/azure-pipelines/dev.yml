@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
     - develop
+    - main
 
 # Trigger pipeline from PRs. Currently, has to be configured in Azure DevOps settings for it to fully work
 pr:
@@ -10,6 +11,7 @@ pr:
   branches:
     include:
       - develop
+      - main
 
 # Environment to use
 pool:
@@ -18,24 +20,22 @@ pool:
 variables:
   - name: nodeVersion
     value: '18.x'
-  # - name: isDev
-  #   value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
   - name: isPullRequest
     value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
   - name: dockerFile
     value: Dockerfile
   - name: tag
     value: dev-$(Build.BuildNumber)
-  #- group: bid-admin-api-demo-dev
-  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+  # Set the library group variable. The group is defined in Azure DevOps.
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop')) }}:
       - group: bid-admin-api-demo-dev
-  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main')) }}:
       - group: bid-admin-api-demo-prod
 
 stages:
 # Build Stage for Dev
 - stage: BuildStage
-  displayName: 'Build Stage for Dev'
+  displayName: 'Build'
   jobs:
   - job: BuildJob
     steps:
@@ -47,7 +47,7 @@ stages:
       - template: common-build-steps.yml
 # Deployment Stage for Dev
 - stage: DeployStage
-  displayName: 'Deploy Stage for Dev'
+  displayName: 'Deploy'
   condition: and(succeeded(), ne(variables.isPullRequest, true))
   dependsOn: BuildStage
   jobs:
