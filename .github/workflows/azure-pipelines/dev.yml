@@ -25,15 +25,11 @@ variables:
     value: Dockerfile
   - name: isPullRequest
     value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
-  - name: isDev
-    value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))]
-  - name: isProd
-    value: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main'))]
   # Container registry tag
-  - ${{ if eq(variables.isDev, true) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop')) }}:
     - name: tag
       value: dev-$(Build.BuildNumber)
-  - ${{ if eq(variables.isProd, true) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main')) }}:
     - name: tag
       value: prod-$(Build.BuildNumber)
   # Set the library group variable. The group is defined in Azure DevOps.
