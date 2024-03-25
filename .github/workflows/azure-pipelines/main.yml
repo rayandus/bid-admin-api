@@ -49,7 +49,7 @@ stages:
       - script: |
           repo_name=$(echo $(Build.Repository.Name) | rev | cut -d'/' -f 1 | rev)
           echo "##vso[task.setvariable variable=repoNameAsImageName]$repo_name"
-          echo Repository Name: $repo_name"
+          echo "Repository Name: $repo_name"
         displayName: 'Set Container Registry Repo Name'
       - template: build-steps.yml
 # Deployment Stage for Dev
