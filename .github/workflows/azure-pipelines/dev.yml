@@ -26,7 +26,11 @@ variables:
     value: Dockerfile
   - name: tag
     value: dev-$(Build.BuildNumber)
-  - group: bid-admin-api-demo-dev
+  #- group: bid-admin-api-demo-dev
+  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+      - group: bid-admin-api-demo-dev
+  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+      - group: bid-admin-api-demo-prod
 
 stages:
 # Build Stage for Dev
