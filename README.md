@@ -91,4 +91,4 @@ To change the database and jwt configuration:
 
 1. Database used is MongoDB hosted in Azure
 
-1. Mongoose for the Object Data Mapper
+1. Mongoose for the Object Data Mapper (test)
