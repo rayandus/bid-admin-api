@@ -40,7 +40,7 @@ variables:
   - ${{ if eq(variables.isDev, true) }}:
       - group: bid-admin-api-demo-dev
   - ${{ if eq(variables.isProd, true) }}:
-      - group: bid-admin-api-demo-prod
+      - group: bid-admin-api-demo-dev
 
 stages:
 # Build Stage for Dev
