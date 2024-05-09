@@ -1,23 +1,29 @@
 steps:
-- task: Docker@2
-  displayName: Login to Docker Registry
-  inputs:
-    command: login
-    containerRegistry: $(serviceConnection)
+- script: |
+    echo "Build.SourceBranch: $(Build.SourceBranch)"
+    echo "System.PullRequest.TargetBranch: $(System.PullRequest.TargetBranch)"
+  displayName: 'Print branch names'
 
-- task: Docker@2
-  displayName: Build Docker Image
-  inputs:
-    command: build
-    Dockerfile: $(dockerFile)
-    repository: $(registryService)/$(repoNameAsImageName)
-    arguments: --no-cache
-    tags: $(tag)
+# steps:
+# - task: Docker@2
+#   displayName: Login to Docker Registry
+#   inputs:
+#     command: login
+#     containerRegistry: $(serviceConnection)
 
-- task: Docker@2
-  displayName: Push Docker Image
-  inputs:
-    command: push
-    repository: $(registryService)/$(repoNameAsImageName)
-    tags: $(tag)
-  condition: and(succeeded(), ne(variables.isPullRequest, true))
+# - task: Docker@2
+#   displayName: Build Docker Image
+#   inputs:
+#     command: build
+#     Dockerfile: $(dockerFile)
+#     repository: $(registryService)/$(repoNameAsImageName)
+#     arguments: --no-cache
+#     tags: $(tag)
+
+# - task: Docker@2
+#   displayName: Push Docker Image
+#   inputs:
+#     command: push
+#     repository: $(registryService)/$(repoNameAsImageName)
+#     tags: $(tag)
+#   condition: and(succeeded(), ne(variables.isPullRequest, true))
