@@ -111,13 +111,3 @@ To change the database and jwt configuration:
   JWT_SECRET=anykeyhere
   MONGO_DB_CONNSTR=mongodb://dbname:password@host.com:10255/...
   ```
-
-## More about this project
-
-1. Built with NestJS and TypeScript
-
-1. Database used is MongoDB hosted in Azure
-
-1. Mongoose for the Object Data Mapper
-
-## Extra notes
