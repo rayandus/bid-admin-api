@@ -1,7 +1,7 @@
 steps:
 - script: |
     echo "Build.SourceBranch: $(Build.SourceBranch)"
-    echo "System.PullRequest.TargetBranch: $(System.PullRequest.TargetBranch)"
+    echo "System.PullRequest.TargetBranch: $(System.PullRequest.targetBranchName)"
   displayName: 'Print branch names'
 
 # steps:
