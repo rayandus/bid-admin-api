@@ -55,7 +55,8 @@ stages:
 # Deployment Stage for Dev test 2
 - stage: DeployStage
   displayName: 'Deploy'
-  condition: and(succeeded(), ne(variables.isPullRequest, true))
+  # condition: and(succeeded(), ne(variables.isPullRequest, true))
+  condition: and(succeeded())
   dependsOn: BuildStage
   jobs:
   - job: DeployJob
