@@ -33,10 +33,10 @@ variables:
     - name: tag
       value: prod-$(Build.BuildNumber)
   # Set the library group variable. The group is defined in Azure DevOps.
-  # - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop')) }}:
-  - group: bid-admin-api-demo-dev
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), and(eq(variables['Build.Reason'], 'PullRequest'), eq(variables['System.PullRequest.TargetBranch'], 'develop'))) }}:
+    - group: bid-admin-api-demo-dev
   - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main')) }}:
-      - group: bid-admin-api-demo-prod
+    - group: bid-admin-api-demo-prod
 
 stages:
 # Build Stage for Dev
