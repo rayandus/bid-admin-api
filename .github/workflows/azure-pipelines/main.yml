@@ -18,6 +18,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
+  - name: system.debug
+    value: 'true'
   - name: nodeVersion
     value: '18.x'
   # Docker filename
@@ -25,18 +27,21 @@ variables:
     value: Dockerfile
   - name: isPullRequest
     value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
+  # - name: tag
+  #   value: dev-$(Build.BuildNumber)
+  # - group: bid-admin-api-demo-dev
   # Container registry tag
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop')) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.targetBranchName'], 'develop')) }}:
     - name: tag
       value: dev-$(Build.BuildNumber)
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main')) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.targetBranchName'], 'main')) }}:
     - name: tag
       value: prod-$(Build.BuildNumber)
   # Set the library group variable. The group is defined in Azure DevOps.
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop')) }}:
-      - group: bid-admin-api-demo-dev
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main')) }}:
-      - group: bid-admin-api-demo-prod
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.targetBranchName'], 'develop')) }}:
+    - group: bid-admin-api-demo-dev
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.targetBranchName'], 'main')) }}:
+    - group: bid-admin-api-demo-prod
 
 stages:
 # Build Stage for Dev
@@ -52,7 +57,7 @@ stages:
           echo "Repository Name: $repo_name"
         displayName: 'Set Container Registry Repo Name'
       - template: build-steps.yml
-# Deployment Stage for Dev
+# Deployment Stage for Dev test 2
 - stage: DeployStage
   displayName: 'Deploy'
   condition: and(succeeded(), ne(variables.isPullRequest, true))
