@@ -18,6 +18,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
+  - name: system.debug
+    value: 'true'
   - name: nodeVersion
     value: '18.x'
   # Docker filename
