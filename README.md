@@ -111,4 +111,3 @@ To change the database and jwt configuration:
   JWT_SECRET=anykeyhere
   MONGO_DB_CONNSTR=mongodb://dbname:password@host.com:10255/...
   ```
-
