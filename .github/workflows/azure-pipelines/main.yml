@@ -52,7 +52,7 @@ stages:
           echo "Repository Name: $repo_name"
         displayName: 'Set Container Registry Repo Name'
       - template: build-steps.yml
-# Deployment Stage for Dev test 1
+# Deployment Stage for Dev test 2
 - stage: DeployStage
   displayName: 'Deploy'
   condition: and(succeeded(), ne(variables.isPullRequest, true))
