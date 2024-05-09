@@ -25,20 +25,20 @@ variables:
     value: Dockerfile
   - name: isPullRequest
     value: $[ eq(variables['Build.Reason'], 'PullRequest') ]
-  - name: tag
-    value: dev-$(Build.BuildNumber)
-  - group: bid-admin-api-demo-dev
+  # - name: tag
+  #   value: dev-$(Build.BuildNumber)
+  # - group: bid-admin-api-demo-dev
   # Container registry tag
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop')) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.targetBranchName'], 'develop')) }}:
     - name: tag
       value: dev-$(Build.BuildNumber)
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main')) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.targetBranchName'], 'main')) }}:
     - name: tag
       value: prod-$(Build.BuildNumber)
   # Set the library group variable. The group is defined in Azure DevOps.
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.TargetBranch'], 'develop')) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), eq(variables['System.PullRequest.targetBranchName'], 'develop')) }}:
     - group: bid-admin-api-demo-dev
-  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.TargetBranch'], 'main')) }}:
+  - ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['System.PullRequest.targetBranchName'], 'main')) }}:
     - group: bid-admin-api-demo-prod
 
 stages:
