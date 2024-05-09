@@ -56,7 +56,7 @@ stages:
 - stage: DeployStage
   displayName: 'Deploy'
   # condition: and(succeeded(), ne(variables.isPullRequest, true))
-  condition: and(succeeded())
+  condition: succeeded()
   dependsOn: BuildStage
   jobs:
   - job: DeployJob
