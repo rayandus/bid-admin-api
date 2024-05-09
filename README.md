@@ -8,6 +8,33 @@ The API is used by the [Bid Portal Demo](https://bidportaldemo.z31.web.core.wind
 
 ## Project Overview
 
+This project is built with:
+
+<table cellpadding="0" cellspacing="0">
+  <tr style="padding: 0">
+    <td valign="top" align="center">
+        <img src="https://github.com/rayandus/my-portfolio/blob/main/public/nextjs.svg" width="50" height="50">
+        <br />
+        Nestjs
+    </td>
+    <td valign="top" align="center">
+        <img src="https://github.com/rayandus/my-portfolio/blob/main/public/public/typescript.svg" width="50" height="50">
+        <br />
+        Typescript
+    </td>
+    <td valign="top" align="center">
+        <img src="https://github.com/rayandus/my-portfolio/blob/main/public/public/mongodb.svg" width="50" height="50">
+        <br />
+        MongoDB
+    </td>
+        <td valign="top" align="center">
+        <img src="https://github.com/rayandus/my-portfolio/blob/main/public/public/mongoose.svg" width="50" height="50">
+        <br />
+        Mongoose
+    </td>
+  </tr>
+</table>
+
 For more details on the architecture, authentication flow, plans or to do's, please check [here](https://rma-demo.notion.site/Bid-Demo-Project-9cf3e25d70e44f4b868499aeb89fd81a)
 
 
